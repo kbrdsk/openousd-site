@@ -1,3 +1,7 @@
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
+
 module.exports = {
     pathPrefix: "/openousd-site",
     siteMetadata: {
@@ -19,6 +23,29 @@ module.exports = {
           resolve: 'gatsby-plugin-sass',
           options: {
             data: `@import "./src/styles/_variables.scss";`,
+          }
+        },
+        {
+          resolve: 'gatsby-source-prismic-graphql',
+          options: {
+            repositoryName: 'openousd', // required
+            // defaultLang: 'en-us', // optional, but recommended
+            accessToken: `${process.env.PRISMIC_API_KEY}`,
+            // prismicRef: '...', // optional, default: master; useful for A/B experiments
+            // path: '/preview', // optional, default: /preview
+            // previews: true, // optional, default: false
+            // pages: [{ // optional
+            //   type: 'Article', // TypeName from prismic
+            //   match: '/article/:uid', // pages will be generated under this pattern
+            //   previewPath: '/article', // optional path for unpublished documents
+            //   component: require.resolve('./src/templates/article.js'),
+            //   sortBy: 'date_ASC', // optional, default: meta_lastPublicationDate_ASC; useful for pagination
+            // }],
+            // extraPageFields: 'article_type', // optional, extends pages query to pass extra fields
+            // sharpKeys: [
+            //   /image|photo|picture/, // (default)
+            //   'profilepic',
+            // ],
           }
         },
         `gatsby-plugin-react-helmet`,
