@@ -84,6 +84,12 @@ export const query = graphql`
       }
     }
 
+    allContentfulCentralProgramCategory(filter: {node_locale: { eq: $language }}) {
+      nodes {
+        categoryName
+      }
+    }
+
     contentfulPage(
       slug: { eq: "central-programs" }
       node_locale: { eq: $language }
